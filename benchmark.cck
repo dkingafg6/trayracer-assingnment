@@ -1,0 +1,76 @@
+#include <iostream>
+#include <fstream>
+#include <chrono>
+#include <vector>
+#include <string>
+#include <thread>
+
+#include "vec3.h"
+#include "color.h"
+#include "raytracer.h"
+#include "sphere.h"
+#include "random.h"
+#include "material.h"
+#include "mat4.h"
+
+int main(int argc, char** argv) {
+    if (argc < 5) {
+        std::cout << "Usage: ./benchmark width height raysPerPixel sphereCount\n";
+        return 1;
+    }
+
+    unsigned width = std::stoi(argv[1]);
+    unsigned height = std::stoi(argv[2]);
+    int raysPerPixel = std::stoi(argv[3]);
+    int sphereCount = std::stoi(argv[4]);
+
+    std::vector<Color> framebuffer(width * height);
+    Raytracer rt(width, height, framebuffer, raysPerPixel, 5);
+
+    // Add random spheres
+    for (int i = 0; i < sphereCount; ++i) {
+        Material* mat = new Material();
+        mat->type = "Lambertian";
+        mat->color = { RandomFloat(), RandomFloat(), RandomFloat() };
+        mat->roughness = RandomFloat();
+        vec3 pos = { RandomFloatNTP() * 50, RandomFloat() * 20, RandomFloatNTP() * 50 };
+        float radius = RandomFloat() * 1.5f + 0.5f;
+        rt.AddObject(new Sphere(radius, pos, mat));
+    }
+
+    // Simple camera setup
+    mat4 view = multiply(rotationy(0), rotationx(0));
+    view.m30 = 0.0f;
+    view.m31 = 10.0f;
+    view.m32 = 0.0f;
+    rt.SetViewMatrix(view);
+
+    auto start = std::chrono::high_resolution_clock::now();
+    rt.Raytrace();
+    auto end = std::chrono::high_resolution_clock::now();
+
+    float duration = std::chrono::duration<float>(end - start).count();
+    size_t totalRays = width * height * raysPerPixel;
+    unsigned threadsUsed = std::thread::hardware_concurrency();
+
+    std::cout << "Render time: " << duration << " seconds\n";
+    std::cout << "Throughput: " << (totalRays / duration) / 1e6f << " MRays/s\n";
+    std::cout << "Threads used: " << threadsUsed << std::endl;
+
+    // Auto-name output file
+    std::string filename = "render_" + std::to_string(sphereCount) + "_spheres_" +
+                           std::to_string(width) + "x" + std::to_string(height) +
+                           "_rpp" + std::to_string(raysPerPixel) + ".ppm";
+
+    std::ofstream out(filename);
+    out << "P3\n" << width << " " << height << "\n255\n";
+    for (Color& c : framebuffer) {
+        int r = std::min(255, int(c.r * 255));
+        int g = std::min(255, int(c.g * 255));
+        int b = std::min(255, int(c.b * 255));
+        out << r << " " << g << " " << b << "\n";
+    }
+    out.close();
+
+    std::cout << " saved image " << filname << std::endl;
+return 0; 
