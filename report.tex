@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{amsmath}
+
+\title{Raytracer Performance Optimization Report}
+\author{Dawood Kingafg6 \\ University Name \\ Course Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report documents the profiling, analysis, and optimization of the raytracer project based on the trayracer codebase. The goal was to improve performance through memory optimizations, multithreading, and static analysis.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+Briefly describe the goal of the assignment:
+- Render a single frame using a CPU-based raytracer.
+- Measure and optimize performance.
+- Implement multithreading.
+- Document all improvements and results.
+
+\section{Project Setup}
+Explain:
+- Initial project cloning.
+- CMake and Ninja build system.
+- Basic benchmark program structure.
+- Compilation environment (Linux, GCC version, etc.)
+
+\section{Benchmarking}
+Describe how the benchmark was tested:
+- Command-line parameters: resolution, rays per pixel, number of spheres.
+- Initial performance results (time taken, MRays/s).
+
+\section{Profiling and Analysis}
+\subsection{Tools Used}
+List the tools you used:
+- \texttt{perf}
+- \texttt{valgrind} (massif, cachegrind)
+- (Any other profilers if used)
+
+\subsection{Findings}
+Show initial bottlenecks:
+- High CPU usage points
+- Memory bottlenecks
+- Expensive function calls
+
+\section{Optimizations}
+For each optimization:
+\begin{itemize}
+    \item Explain what was optimized
+    \item How it was optimized
+    \item Before/After performance numbers
+\end{itemize}
+
+Example subsections:
+\subsection{Memory Access Optimization}
+\subsection{Math Function Optimization}
+\subsection{Multithreading}
+
+\section{Multithreading Implementation}
+Describe:
+- How rendering was parallelized.
+- Number of threads.
+- Synchronization methods (mutexes, locks, etc.)
+- Final multithreaded performance results.
+
+\section{Results}
+\begin{itemize}
+    \item Table comparing initial vs optimized performance
+    \item Final MRays/s achieved
+    \item Graphs or charts (optional)
+\end{itemize}
+
+\section{Conclusion}
+Summarize:
+- Overall performance gain
+- Lessons learned
+- Possible future improvements
+
+\section{References}
+List any online resources, articles, or books you used.
+
+\end{document}
