@@ -1,9 +1,40 @@
-.vscode/*
+# Ignore build and bin folders
 build/*
 bin/*
 
+# Keep important empty folders
 !build/.gitkeep
 !bin/.gitkeep
+
+# Ignore VSCode config except important files
+.vscode/*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/c_cpp_properties.json
+# Ignore build and bin folders
+build/*
+bin/*
+
+# Keep important empty folders
+!build/.gitkeep
+!bin/.gitkeep
+
+# Ignore VSCode config except important files
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/c_cpp_properties.json
+
+# Ignore executables
+benchmark
+raytracer
+
+# Ignore temporary and output files
+*.o
+*.out
+*.exe
+*.log
+*.tmp
+*.ppm
+*.png
+*.jpg
