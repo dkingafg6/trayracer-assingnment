@@ -1,21 +1,39 @@
-# Trayracer
+# Trayracer Assignment
 
-Really really poorly written (by design) raytracer for use as a worst case scenario within programming courses.
+This project is based on the [trayracer](https://github.com/fLindahl/trayracer) repository.  
+It is modified and optimized for a university assignment involving profiling, optimization, and multithreaded rendering.
 
-## Build instructions
+## 🛠 Features Implemented
 
-Windows:
+- **Single-frame render** without OpenGL or user interface.
+- **Command-line arguments** for customizable rendering:
+  - Image width
+  - Image height
+  - Rays per pixel
+  - Number of spheres
+- **Custom random number generator** implemented (xorshift).
+- **Performance measurement**:
+  - Time taken to render
+  - Total rays traced
+  - MRays/s (Million Rays per second)
+- **Memory leak fixes** and **compiler warnings** cleaned.
+- **Multithreaded rendering** (CPU parallelization).
+- **Optimization** through profiling and memory improvements.
+- **LaTeX report** documenting all profiling and optimization steps.
 
-* You can either generate visual studio solution by using CMake, or just open the folder within VSCode and build/run.
+## 🧩 Build Instructions
 
-Linux:
+Requires:
+- GCC 9+ or Clang 10+
+- CMake 3.15+
+- Ninja
+- OpenGL & X11 libraries (for compilation only)
 
-* Untested, but should run with CMake and possibly even via VSCode.
+Build with:
 
-If you have problems with missing libraries, install (sudo apt-get install ...):
-* libgl-dev
-* xorg-dev
-* libglu1-mesa-dev
-* gdb
-
-VSCode requires the C/C++ extension to be able to use the debugger.
+```bash
+cd ~/raytracer
+mkdir -p build
+cd build
+cmake -G Ninja ..
+ninja
