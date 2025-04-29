@@ -94,6 +94,7 @@ int main()
         }
     }
 	// check if the objects are created
+	//check if the objects are created
     bool exit = false;
 
     // camera
