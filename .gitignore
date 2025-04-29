@@ -38,3 +38,5 @@ raytracer
 *.ppm
 *.png
 *.jpg
+# Ignore Visual Studio temporary files
+.vs/

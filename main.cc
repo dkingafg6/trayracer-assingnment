@@ -16,7 +16,7 @@ int main()
         return 1;
 
     std::vector<Color> framebuffer;
-
+    // JUST FOR TEST
     const unsigned w = 200;
     const unsigned h = 100;
     framebuffer.resize(w * h);
