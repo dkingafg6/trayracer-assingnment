@@ -93,7 +93,7 @@ int main()
             rt.AddObject(ground);
         }
     }
-    
+	// check if the objects are created
     bool exit = false;
 
     // camera
